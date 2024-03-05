@@ -1,0 +1,5 @@
+{
+  "tasks" : {
+    "local-setup": "deno run --quiet --unstable --allow-all tools/local-setup.ts .local"
+  }
+}

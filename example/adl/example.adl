@@ -1,0 +1,41 @@
+module example {
+
+newtype X = String;
+newtype Y = B;
+type Z = D;
+
+struct A {
+    B b;
+    Vector<B> bs;
+    Nullable<B> bish;
+    StringMap<B> bmap;
+    X c;
+    Vector<Z> xs;
+    Vector<Y> d;
+    Z e;
+};
+
+struct B {
+    C c;
+};
+
+union C {
+    D d1;
+    D d2;
+    D d3;
+    StringMap<D> dmap;
+    E e1;
+};
+
+struct D {
+};
+
+struct E {
+    F a;
+};
+
+struct F {
+
+};
+
+};
