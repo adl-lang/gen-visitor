@@ -1,3 +1,4 @@
+export * as runtime_adl from "https://deno.land/x/adllang_tsdeno@v0.6/adl-gen/runtime/adl.ts";
 export * as utils from "https://deno.land/x/adllang_tsdeno@v0.6/adl-gen/runtime/utils.ts";
 export * as adlast from "https://deno.land/x/adllang_tsdeno@v0.6/adl-gen/sys/adlast.ts";
 export * as types from "https://deno.land/x/adllang_tsdeno@v0.6/adl-gen/sys/types.ts";

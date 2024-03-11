@@ -3,7 +3,8 @@ import {
   genVisitor
 // } from "https://deno.land/x/adllang_genmermaid@v0.1/mod.ts"
 } from "../mod.ts";
-import { globFiles, genTypescript } from "https://deno.land/x/adllang_tsdeno@v0.6/mod.ts";
+import { getAdlStdLibDir, globFiles, genTypescript } from "https://deno.land/x/adllang_tsdeno@v0.6/mod.ts";
+import { ParseAdlParams } from "https://deno.land/x/adllang_tsdeno@v0.6/utils/adl.ts";
 
 async function globbedFilesToModule(dir0: string, files: string[]) {
   const dir = await Deno.realPath(dir0);
@@ -28,22 +29,25 @@ async function globedModules(dir0: string, pattern0?: string) {
 }
 
 async function main() {
-  const args = flags.parse(Deno.args, { string: ["file"] });
-  // const adlStdLibDir = await getAdlStdLibDir();
+  const args = flags.parse(Deno.args, { string: ["file", "import_base"] });
+  const adlStdLibDir = await getAdlStdLibDir();
   const verbose = false;
   const adlDir = './adl';
 
   const promises: Promise<void>[] = [];
 
   const adlMods = await globedModules(adlDir);
-  const params = {
-    adlModules: [...adlMods],
-    searchPath: [adlDir],
+  const adlStdLibMods = await globedModules(adlStdLibDir);
+  const params: ParseAdlParams = {
+    adlModules: [...adlMods, ...adlStdLibMods],
+    searchPath: [adlDir, ...adlStdLibMods],
     verbose,
   };
   // Deno.mkdirSync(sqldir + "/create", { recursive: true });
   promises.push(genVisitor({
     ...params,
+    ts_style: "deno",
+    import_base: args.import_base ? args.import_base : "https://deno.land/x/adllang_tsdeno@v0.6/adl-gen/",
     createFile: args.file ? args.file : "-",
     rootStructs: args._.map(a => `${a}`),
   }));

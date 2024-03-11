@@ -55,7 +55,6 @@ export async function loadResources(
   const acceptAll = (_scopedDecl: adlast.ScopedDecl) => true;
   const filter = params.filter ?? acceptAll;
 
-  // Find all of the struct declarations that have a DbTable annotation
   forEachDecl(loadedAdl.modules, (scopedDecl) => {
     const decl = scopedDecl.decl
     resources.declMap[`${scopedDecl.moduleName}.${decl.name}`] = scopedDecl;

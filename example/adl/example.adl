@@ -5,6 +5,7 @@ newtype Y = B;
 type Z = D;
 
 struct A {
+    Vector<A> as;
     B b;
     Vector<B> bs;
     Nullable<B> bish;
@@ -25,6 +26,16 @@ union C {
     D d3;
     StringMap<D> dmap;
     E e1;
+    G g;
+    Vector<C> cs;
+};
+
+union G {
+    H h;
+};
+
+struct H {
+
 };
 
 struct D {
